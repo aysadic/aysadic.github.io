@@ -1,0 +1,151 @@
+/* =================================== */
+/*  3. Layouts
+/* =================================== */
+
+#main-wrapper {
+  background:#fff;
+}
+
+.box #main-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+	@include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.1));
+}
+
+.section {
+  position: relative;
+  padding: 4.5rem 0;
+  overflow:hidden;
+}
+
+@include media-breakpoint-down(sm) {
+	.section {
+		padding: 3.5rem 0;
+	}
+}
+
+@include media-breakpoint-up(xl) {
+  .container {
+	max-width: 1170px !important;
+  }
+}
+
+/*== Fullscreen Height ==*/
+.fullscreen{
+	min-height: 100vh!important;
+}
+
+/*== Fullscreen Height ==*/
+.fullscreen-with-header{
+	min-height: calc(100vh - 67px)!important;
+}
+
+/*== Scroll Down Arrow ==*/
+
+.scroll-down-arrow {
+  position: absolute;
+  z-index: 3;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -16px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+  .animated {
+    position: relative;
+	animation: fadeInDown 1.5s infinite;
+	-webkit-animation: fadeInDown 1.5s infinite;
+	-moz-animation: fadeInDown 1.5s infinite;
+	-o-animation: fadeInDown 1.5s infinite;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    top: -25px;
+    opacity: 0;
+  }
+  100% {
+    top: 10px;
+    opacity: 1;
+  }
+}
+
+
+/*== Heading Separator Line ==*/
+.heading-separator-line{width:80px;}
+
+
+/*== box Framed ==*/
+
+@include media-breakpoint-up(lg) {
+.box-framed .dark.frame-top,
+			.box-framed .dark.frame-bottom,
+			.box-framed .dark.frame-left,
+			.box-framed .dark.frame-right { background: #000; }
+			
+.box-framed {
+  .frame-top, .frame-bottom, .frame-left, .frame-right {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #f0f0f0;
+    z-index: 1051;
+  }
+  .dark{
+	.frame-top, .frame-bottom, .frame-left, .frame-right {
+    background: #000;
+    }
+  }
+  .frame-left {
+    bottom: 0;
+    width: 20px;
+  }
+  .frame-right {
+    bottom: 0;
+    width: 20px;
+    left: auto;
+    right: 0;
+  }
+  .frame-top {
+    right: 0;
+    height: 20px;
+  }
+  .frame-bottom {
+    right: 0;
+    height: 20px;
+    top: auto;
+    bottom: 0;
+  }
+  #main-wrapper {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  #header {
+    .primary-menu.bg-transparent {
+      top: 20px;
+    }
+    .container, .container-fluid {
+      padding-left: 45px;
+      padding-right: 45px;
+    }
+  }
+  #back-to-top {
+    bottom: 30px;
+    right: 30px;
+  }
+  .scroll-down-arrow {
+    bottom: 30px;
+  }
+  .modal-dialog {
+    margin: 3.2rem auto;
+  }
+  #styles-switcher {
+    margin-left: 20px;
+  }
+}
+}

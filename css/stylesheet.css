@@ -3331,3 +3331,11 @@ input:-internal-autofill-selected {
   left: -40px;
   border-radius: 4px 0px 0px 4px;
 }
+
+@media only screen and (max-width: 576px) {
+  .logo-top-styler {
+    padding-top: 5%;
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}

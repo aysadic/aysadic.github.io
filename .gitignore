@@ -1,2 +1,22 @@
+# VS Code settings
 .vscode/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# IDE specific files
+.idea/
+*.swp
+*.swo
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build output
+dist/
+build/
+*.log
+
 .venv/

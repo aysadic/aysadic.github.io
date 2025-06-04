@@ -3329,6 +3329,8 @@ input:-internal-autofill-selected {
     padding-top: 5%;
     /* padding-left: 20%;
     padding-right: 20%; */
-  
+  }
+  .responsive-text {
+    font-size: 15px !important;
   }
 }

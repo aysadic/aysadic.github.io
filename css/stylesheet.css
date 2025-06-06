@@ -3335,3 +3335,15 @@ input:-internal-autofill-selected {
     font-size: 15px !important;
   }
 }
+
+@media only screen and (max-width: 992px) {
+  .logo-top-styler {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    /* padding-left: 20%;
+    padding-right: 20%; */
+  }
+  .responsive-text {
+    font-size: 15px !important;
+  }
+}

@@ -18,26 +18,35 @@ if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
 // Autoplay visible GIFs, respecting manual pause and reduced-motion preferences.
 document.querySelectorAll('.project-animation').forEach(function(figure) {
     var image = figure.querySelector('img[data-animation]');
-    var button = figure.querySelector('.animation-toggle');
-    if (!image || !button) return;
+    if (!image) return;
+    image.setAttribute('role', 'button');
+    image.setAttribute('tabindex', '0');
+    image.setAttribute('aria-label', image.alt + ' Animation playback');
+    image.setAttribute('aria-pressed', 'false');
+    image.title = 'Click to play animation';
     var poster = image.getAttribute('src');
     var motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
     var visible = false;
     var userPlayback = null;
     function setPlaying(playing) {
-        if ((button.getAttribute('aria-pressed') === 'true') === playing) return;
+        if ((image.getAttribute('aria-pressed') === 'true') === playing) return;
         image.src = playing ? image.dataset.animation : poster;
-        button.setAttribute('aria-pressed', String(playing));
-        button.textContent = playing ? 'Pause animation' : 'Play animation';
+        image.setAttribute('aria-pressed', String(playing));
+        image.title = playing ? 'Click to pause animation' : 'Click to play animation';
     }
     function updatePlayback() {
         setPlaying(visible && !document.hidden && userPlayback !== false &&
             (!motionPreference.matches || userPlayback === true));
     }
-    button.hidden = false;
-    button.addEventListener('click', function() {
-        userPlayback = button.getAttribute('aria-pressed') !== 'true';
+    image.addEventListener('click', function() {
+        userPlayback = image.getAttribute('aria-pressed') !== 'true';
         setPlaying(userPlayback);
+    });
+    image.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            image.click();
+        }
     });
     if ('IntersectionObserver' in window) {
         var observer = new IntersectionObserver(function(entries) {

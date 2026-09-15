@@ -28,9 +28,13 @@ p a:not(.btn) {
   top: 12px;
 }
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+.project-animation img[role="button"]:focus-visible {
   outline: 3px solid #20c997;
   outline-offset: 4px;
+}
+.project-animation img[role="button"] {
+  cursor: pointer;
 }
 #resume li + li {
   margin-top: 0.5rem;

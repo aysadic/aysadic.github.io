@@ -15,18 +15,41 @@ var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matche
 var copyrightYear = document.getElementById('copyright-year');
 if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
 
-// Load project GIFs only on request; a static poster also provides a pause state.
+// Autoplay visible GIFs, respecting manual pause and reduced-motion preferences.
 document.querySelectorAll('.project-animation').forEach(function(figure) {
     var image = figure.querySelector('img[data-animation]');
     var button = figure.querySelector('.animation-toggle');
     if (!image || !button) return;
     var poster = image.getAttribute('src');
+    var motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var visible = false;
+    var userPlayback = null;
+    function setPlaying(playing) {
+        if ((button.getAttribute('aria-pressed') === 'true') === playing) return;
+        image.src = playing ? image.dataset.animation : poster;
+        button.setAttribute('aria-pressed', String(playing));
+        button.textContent = playing ? 'Pause animation' : 'Play animation';
+    }
+    function updatePlayback() {
+        setPlaying(visible && !document.hidden && userPlayback !== false &&
+            (!motionPreference.matches || userPlayback === true));
+    }
     button.hidden = false;
     button.addEventListener('click', function() {
-        var playing = button.getAttribute('aria-pressed') === 'true';
-        image.src = playing ? poster : image.dataset.animation;
-        button.setAttribute('aria-pressed', String(!playing));
-        button.textContent = playing ? 'Play animation' : 'Pause animation';
+        userPlayback = button.getAttribute('aria-pressed') !== 'true';
+        setPlaying(userPlayback);
+    });
+    if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+            visible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.15;
+            updatePlayback();
+        }, { threshold: [0, 0.15] });
+        observer.observe(image);
+    }
+    document.addEventListener('visibilitychange', updatePlayback);
+    motionPreference.addEventListener('change', function() {
+        userPlayback = null;
+        updatePlayback();
     });
 });
 

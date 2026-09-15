@@ -18,10 +18,10 @@ Run `python -m http.server 8000 --bind 127.0.0.1` from the repository root and o
 - `index.html`: homepage and publication metadata.
 - `css/stylesheet.css`, `js/theme.js`: the original theme styles and scripts.
 - `css/site-fixes.css`: small accessibility and responsive fixes; preserves the theme's layout and palette.
-- `resume.html`: editable public resume; print to A4 PDF with backgrounds enabled and browser headers/footers disabled to update `ayberksadic_cv.pdf`.
+- `resume.html`: the public HTML resume.
 - `images/profile.png`: the existing portrait, also used for social sharing.
 - `blog/`: archived site with its existing assets.
 
-The homepage and public resume use the general and embedded resumes from `aysadic/ayberksadic_cv`, checked against revision `04b54a6`. Springer chapter metadata was checked against the Crossref record for `10.1007/978-3-032-34511-0_5` on September 15, 2026.
+The homepage uses the general and embedded resumes from `aysadic/ayberksadic_cv`, checked against revision `04b54a6`, as content sources. The website does not offer a downloadable resume. Springer chapter metadata was checked against the Crossref record for `10.1007/978-3-032-34511-0_5` on September 15, 2026.
 
-Before publishing, check navigation at mobile and desktop widths, keyboard access, no-JavaScript navigation, reduced motion, local asset links, PDF text, and publication links. Keep the PDF consistent with the HTML resume.
+Before publishing, check navigation at mobile and desktop widths, keyboard access, no-JavaScript navigation, reduced motion, local asset links, and publication links.

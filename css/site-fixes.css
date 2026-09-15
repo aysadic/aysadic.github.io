@@ -1,0 +1,71 @@
+/* Small usability fixes for the existing Simone theme. */
+.intro-summary {
+  max-width: 660px;
+}
+/* Preserve the theme colors while making small text easier to read. */
+.bg-dark-2 .text-white-50 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus {
+  color: #212529;
+}
+p a:not(.btn) {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 1100;
+  padding: 10px 16px;
+  background: #fff;
+  color: #212529;
+}
+.skip-link:focus {
+  top: 12px;
+}
+a:focus-visible,
+button:focus-visible,
+.project-animation img[role="button"]:focus-visible {
+  outline: 3px solid #20c997;
+  outline-offset: 4px;
+}
+.project-animation img[role="button"] {
+  cursor: pointer;
+}
+#resume li + li {
+  margin-top: 0.5rem;
+}
+#resume .badge {
+  white-space: normal;
+  line-height: 1.5;
+}
+#contact a[href^="mailto:"] {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 991.98px) {
+  #content > section,
+  #publications .featured-box[id] {
+    scroll-margin-top: 100px;
+  }
+}
+@media (max-width: 575.98px) {
+  .section .text-9 {
+    font-size: 1.75rem !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-bg {
+    background-attachment: scroll !important;
+  }
+}

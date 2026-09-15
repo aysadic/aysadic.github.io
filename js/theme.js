@@ -10,13 +10,57 @@
 (function ($) {
 	"use strict";
 
-// Preloader
-$(window).on('load', function () {
-	$('.lds-ellipsis').fadeOut(); // will first fade out the loading animation
-	$('.preloader').delay(333).fadeOut('slow'); // will fade out the white DIV that covers the website.
-	$('body').delay(333);
-});
+// Respect reduced motion in the theme's optional animations.
+var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var copyrightYear = document.getElementById('copyright-year');
+if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
 
+// Autoplay visible GIFs, respecting manual pause and reduced-motion preferences.
+document.querySelectorAll('.project-animation').forEach(function(figure) {
+    var image = figure.querySelector('img[data-animation]');
+    if (!image) return;
+    image.setAttribute('role', 'button');
+    image.setAttribute('tabindex', '0');
+    image.setAttribute('aria-label', image.alt + ' Animation playback');
+    image.setAttribute('aria-pressed', 'false');
+    image.title = 'Click to play animation';
+    var poster = image.getAttribute('src');
+    var motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var visible = false;
+    var userPlayback = null;
+    function setPlaying(playing) {
+        if ((image.getAttribute('aria-pressed') === 'true') === playing) return;
+        image.src = playing ? image.dataset.animation : poster;
+        image.setAttribute('aria-pressed', String(playing));
+        image.title = playing ? 'Click to pause animation' : 'Click to play animation';
+    }
+    function updatePlayback() {
+        setPlaying(visible && !document.hidden && userPlayback !== false &&
+            (!motionPreference.matches || userPlayback === true));
+    }
+    image.addEventListener('click', function() {
+        userPlayback = image.getAttribute('aria-pressed') !== 'true';
+        setPlaying(userPlayback);
+    });
+    image.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            image.click();
+        }
+    });
+    if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+            visible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.15;
+            updatePlayback();
+        }, { threshold: [0, 0.15] });
+        observer.observe(image);
+    }
+    document.addEventListener('visibilitychange', updatePlayback);
+    motionPreference.addEventListener('change', function() {
+        userPlayback = null;
+        updatePlayback();
+    });
+});
 
 // Header Sticky
 $(window).on('scroll',function() {
@@ -43,28 +87,31 @@ $(window).on('scroll',function() {
 });
 
 // Sections Scroll
-if($("body").hasClass("side-header")){
-$('.smooth-scroll').on('click', function() {
-	event.preventDefault();
-    var sectionTo = $(this).attr('href');
-	$('html, body').stop().animate({
-      scrollTop: $(sectionTo).offset().top}, 1500, 'easeInOutExpo');
+$('.smooth-scroll').on('click', function(event) {
+    var sectionTo = document.querySelector(this.hash);
+    if (!sectionTo) return;
+    event.preventDefault();
+    // The dropdown is absolutely positioned, so the header retains its closed height.
+    var headerOffset = window.innerWidth < 992 ? $('#header').outerHeight() + 8 : 0;
+    $('html, body').stop().animate({
+        scrollTop: $(sectionTo).offset().top - headerOffset
+    }, reducedMotion ? 0 : 1500, 'easeInOutExpo');
 });
-   }else {
-$('.smooth-scroll').on('click', function() {
-	event.preventDefault();
-    var sectionTo = $(this).attr('href');
-	$('html, body').stop().animate({
-      scrollTop: $(sectionTo).offset().top - 50}, 1500, 'easeInOutExpo');
-});
-}
 
-// Mobile Menu
-$('.navbar-toggler').on('click', function() {
-	$(this).toggleClass('show');
+// Mobile Menu: use Bootstrap's state so visibility and ARIA stay in sync.
+$('.navbar-collapse').on('shown.bs.collapse', function() {
+    $('.navbar-toggler').addClass('show');
+}).on('hidden.bs.collapse', function() {
+    $('.navbar-toggler').removeClass('show');
 });
-$(".navbar-nav a").on('click', function() {
-    $(".navbar-collapse, .navbar-toggler").removeClass("show");
+$('.navbar-nav a').on('click', function() {
+    $('.navbar-collapse').collapse('hide');
+});
+$(document).on('keydown', function(event) {
+    if (event.key === 'Escape' && window.innerWidth < 992 && $('.navbar-collapse').hasClass('show')) {
+        $('.navbar-collapse').collapse('hide');
+        $('.navbar-toggler').trigger('focus');
+    }
 });
 
 // Overlay Menu & Side Open Menu
@@ -212,6 +259,7 @@ $(".portfolio-filter").each(function() {
     Parallax Background
 -------------------------------------- */
 $(".parallax").each(function () {
+if (reducedMotion) return;
 $(this).parallaxie({
 	speed: 0.5,
 });
@@ -242,7 +290,9 @@ $(".text-rotator").each(function () {
 -------------------------------------- */
 
 $(".typed").each(function() {
-var typed = new Typed('.typed', {
+if (reducedMotion || typeof Typed === "undefined") return;
+this.textContent = "";
+var typed = new Typed(this, {
     stringsElement: '.typed-strings',
 	loop: true,
 	typeSpeed: 100,
@@ -294,7 +344,7 @@ $(function () {
 		});
 		});
 $('#back-to-top').on("click", function() {
-	$('html, body').animate({scrollTop:0}, 'slow');
+	$('html, body').animate({scrollTop:0}, reducedMotion ? 0 : 'slow');
 	return false;
 });
 

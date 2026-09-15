@@ -15,6 +15,21 @@ var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matche
 var copyrightYear = document.getElementById('copyright-year');
 if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
 
+// Load project GIFs only on request; a static poster also provides a pause state.
+document.querySelectorAll('.project-animation').forEach(function(figure) {
+    var image = figure.querySelector('img[data-animation]');
+    var button = figure.querySelector('.animation-toggle');
+    if (!image || !button) return;
+    var poster = image.getAttribute('src');
+    button.hidden = false;
+    button.addEventListener('click', function() {
+        var playing = button.getAttribute('aria-pressed') === 'true';
+        image.src = playing ? poster : image.dataset.animation;
+        button.setAttribute('aria-pressed', String(!playing));
+        button.textContent = playing ? 'Play animation' : 'Pause animation';
+    });
+});
+
 // Header Sticky
 $(window).on('scroll',function() {
 	var stickytop = $('#header.sticky-top .bg-transparent');

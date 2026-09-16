@@ -1,4 +1,12 @@
 /* Small usability fixes for the existing Simone theme. */
+html {
+  color-scheme: dark;
+  background-color: #111418;
+}
+body.side-header,
+.side-header #main-wrapper {
+  background-color: #111418;
+}
 .intro-summary {
   max-width: 660px;
 }
@@ -47,6 +55,18 @@ button:focus-visible,
   overflow-wrap: anywhere;
 }
 @media (max-width: 991.98px) {
+  .side-header .logo-top-styler {
+    padding: 12px 0;
+  }
+  .side-header .logo-top-styler > p {
+    display: none;
+  }
+  .side-header .primary-menu > .container-fluid {
+    flex-wrap: nowrap;
+  }
+  .side-header .primary-menu .navbar-collapse {
+    background-color: #111418;
+  }
   #content > section,
   #publications .featured-box[id] {
     scroll-margin-top: 100px;
@@ -67,5 +87,22 @@ button:focus-visible,
   }
   .hero-bg {
     background-attachment: scroll !important;
+  }
+}
+
+@media (max-width: 359.98px) {
+  .side-header .primary-menu .social-icons {
+    display: none !important;
+  }
+  .side-header .navbar-toggler {
+    margin-left: auto;
+  }
+}
+/* Touch scrolling should not expose a fixed/parallax background layer. */
+@media (hover: none), (pointer: coarse), (max-width: 991.98px) {
+  .hero-wrap .hero-bg {
+    background-attachment: scroll !important;
+    background-position: center center !important;
+    background-size: cover !important;
   }
 }

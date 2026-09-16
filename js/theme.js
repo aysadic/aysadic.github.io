@@ -259,7 +259,7 @@ $(".portfolio-filter").each(function() {
     Parallax Background
 -------------------------------------- */
 $(".parallax").each(function () {
-if (reducedMotion) return;
+if (reducedMotion || window.matchMedia('(hover: none), (pointer: coarse), (max-width: 991.98px)').matches) return;
 $(this).parallaxie({
 	speed: 0.5,
 });

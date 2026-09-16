@@ -34,7 +34,7 @@
 <link rel="stylesheet" type="text/css" href='vendor/magnific-popup/magnific-popup.min.css' />
 <!-- Custom Stylesheet -->
 <link rel="stylesheet" type="text/css" href='css/stylesheet.css' />
-<link rel="stylesheet" href="css/site-fixes.css?v=20260916">
+<link rel="stylesheet" href="css/site-fixes.css?v=20260916b">
 <noscript><style>#header-nav.collapse{display:block}.navbar-toggler{display:none}</style></noscript>
 </head>
 
@@ -370,27 +370,9 @@
             <noscript><a href="images/neck-robot.gif">View robot animation (GIF)</a></noscript>
           </figure>
           <h4 class="text-4 text-white">Biomechanical modelling</h4>
-          <h5 class="text-3 text-primary mt-3">Cervical vertebrae pose prediction &middot; IEEE ROBIO 2025</h5>
+          <h5 class="text-3 text-primary mt-3">Cervical vertebrae pose prediction</h5>
           <p class="text-white-50">We developed a regression model that predicts cervical vertebrae pose from neck length and total neck flexion angle. Trained on X-ray images and evaluated using K-fold cross-validation, the model estimates the positions and orientations of the cervical vertebrae. <a class="smooth-scroll" href="#publication-spine-pose">View the ROBIO 2025 publication</a>.</p>
-          <div class="row mt-3">
-            <div class="col-md-6">
-              <figure class="mb-4">
-                <a href="images/cervical_spine_aligned.png" aria-label="Open full-size neck length and flexion angle figure">
-                  <img class="img-fluid rounded" src="images/cervical_spine_aligned.png" width="1287" height="1302" loading="lazy" decoding="async" alt="Diagram of cervical vertebrae C2-C7 defining neck length L and total neck flexion angle theta.">
-                </a>
-                <figcaption class="text-white-50 text-2 mt-2">Model inputs: neck length and total neck flexion angle. <a href="images/cervical_spine_aligned.png">View full-size figure</a>.</figcaption>
-              </figure>
-            </div>
-            <div class="col-md-6">
-              <figure class="mb-4">
-                <a href="images/simulation_results_4.png" aria-label="Open full-size predicted and measured vertebral poses figure">
-                  <img class="img-fluid rounded" src="images/simulation_results_4.png" width="1020" height="1135" loading="lazy" decoding="async" alt="Cervical X-ray with predicted C2-C7 poses in red and measured poses in green, alongside position and angle comparisons.">
-                </a>
-                <figcaption class="text-white-50 text-2 mt-2">Example comparison of predicted vertebral poses with X-ray measurements. <a href="images/simulation_results_4.png">View full-size figure</a>.</figcaption>
-              </figure>
-            </div>
-          </div>
-          <h5 class="text-3 text-primary">Human head-neck motion simulation &middot; RoManSy 2026</h5>
+          <h5 class="text-3 text-primary">Human head-neck motion simulation</h5>
           <p class="text-white-50">This biomechanical model simulates human head and neck motion. It was initially introduced in our RoManSy 2026 paper on the design and task-space evaluation of a 3-URS parallel human neck assistance robot. <a class="smooth-scroll" href="#publication-neck-robot">View the RoManSy 2026 publication</a>.</p>
           <figure class="project-animation mt-3 mb-0">
             <img id="cervical-spine-animation" class="img-fluid rounded" src="images/cervical-spine-poster.png" data-animation="images/cervical-spine.gif" width="400" height="284" loading="lazy" decoding="async" alt="Biomechanical simulation of human head and neck motion, with individually colored cervical vertebrae.">
@@ -398,6 +380,24 @@
 
             <noscript><a href="images/cervical-spine.gif">View head-neck simulation (GIF)</a></noscript>
           </figure>
+          <div class="row mt-4 research-figures">
+            <div class="col-md-6">
+              <figure class="mb-4">
+                <a href="images/cervical_spine_aligned.png" aria-label="Open full-size neck length and flexion angle figure">
+                  <img class="img-fluid rounded research-figure" src="images/cervical_spine_aligned.png" width="1287" height="1302" loading="lazy" decoding="async" alt="Diagram of cervical vertebrae C2-C7 defining neck length L and total neck flexion angle theta.">
+                </a>
+                <figcaption class="text-white-50 text-2 mt-2">Model inputs: neck length and total neck flexion angle. <a href="images/cervical_spine_aligned.png">View full-size figure</a>.</figcaption>
+              </figure>
+            </div>
+            <div class="col-md-6">
+              <figure class="mb-4">
+                <a href="images/simulation_results_4.png" aria-label="Open full-size predicted and measured vertebral poses figure">
+                  <img class="img-fluid rounded research-figure" src="images/simulation_results_4.png" width="1020" height="1135" loading="lazy" decoding="async" alt="Cervical X-ray with predicted C2-C7 poses in red and measured poses in green, alongside position and angle comparisons.">
+                </a>
+                <figcaption class="text-white-50 text-2 mt-2">Example comparison of predicted vertebral poses with X-ray measurements. <a href="images/simulation_results_4.png">View full-size figure</a>.</figcaption>
+              </figure>
+            </div>
+          </div>
         </div>
       </div>
     </section>

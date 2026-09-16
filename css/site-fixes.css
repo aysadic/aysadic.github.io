@@ -106,3 +106,12 @@ button:focus-visible,
     background-size: cover !important;
   }
 }
+
+/* Match the research figure frames while preserving the complete diagrams. */
+.research-figure {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background-color: #fff;
+}
